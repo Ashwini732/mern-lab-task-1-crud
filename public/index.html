@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Item Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Item Management System</h1>
+
+        <!-- Add / Update Form -->
+        <div class="form-container">
+
+            <h2 id="formTitle">Add Item</h2>
+
+            <form id="itemForm">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter item name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input
+                        type="number"
+                        id="price"
+                        placeholder="Enter price"
+                        min="0"
+                        step="any"
+                        required
+                    >
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" id="submitBtn">
+                        Submit
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="cancel-btn"
+                        hidden
+                    >
+                        Cancel
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- Items Table -->
+        <div class="table-container">
+
+            <h2>Item List</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="itemTableBody">
+                    <!-- Items will be displayed here -->
+                </tbody>
+            </table>
+
+        </div>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

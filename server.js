@@ -1,0 +1,110 @@
+const express = require("express");
+const path = require("path");
+
+const app = express();
+const PORT = 3000;
+
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+// Initial array of items
+let items = [
+    { id: 1, name: "Book", price: 250 },
+    { id: 2, name: "Pen", price: 25 }
+];
+
+let nextId = 3;
+
+// READ: Get all items
+app.get("/api/items", (req, res) => {
+    res.json(items);
+});
+
+// CREATE: Add a new item
+app.post("/api/items", (req, res) => {
+    const { name, price } = req.body;
+
+    if (
+        typeof name !== "string" ||
+        !name.trim() ||
+        price === "" ||
+        price === null ||
+        price === undefined ||
+        !Number.isFinite(Number(price)) ||
+        Number(price) < 0
+    ) {
+        return res.status(400).json({
+            message: "Enter a valid name and price."
+        });
+    }
+
+    const newItem = {
+        id: nextId++,
+        name: name.trim(),
+        price: Number(price)
+    };
+
+    items.push(newItem);
+
+    res.status(201).json(newItem);
+});
+
+// UPDATE: Edit an existing item
+app.put("/api/items/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const { name, price } = req.body;
+
+    if (
+        !Number.isInteger(id) ||
+        typeof name !== "string" ||
+        !name.trim() ||
+        price === "" ||
+        price === null ||
+        price === undefined ||
+        !Number.isFinite(Number(price)) ||
+        Number(price) < 0
+    ) {
+        return res.status(400).json({
+            message: "Enter a valid name and price."
+        });
+    }
+
+    const item = items.find(item => item.id === id);
+
+    if (!item) {
+        return res.status(404).json({
+            message: "Item not found."
+        });
+    }
+
+    item.name = name.trim();
+    item.price = Number(price);
+
+    res.json(item);
+});
+
+// DELETE: Remove an item
+app.delete("/api/items/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const index = items.findIndex(item => item.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({
+            message: "Item not found."
+        });
+    }
+
+    const deletedItem = items.splice(index, 1)[0];
+
+    res.json({
+        message: "Item deleted successfully.",
+        item: deletedItem
+    });
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
