@@ -1,3 +1,11 @@
+
+
+https://github.com/user-attachments/assets/b8ce4fd5-c1ce-4ad6-939e-2b8696742c6a
+
+
+
+https://github.com/user-attachments/assets/898aab9a-4ec7-4bda-91c8-feeedd1044b7
+
 # CRUD Operations Using Express.js and REST API
 
 ## Project Description
@@ -18,12 +26,7 @@ A simple web application that performs CRUD (Create, Read, Update, and Delete) o
 - Delete items
 
 ## Video Demo
-
-
-
-
-
-
+https://github.com/user-attachments/assets/95201802-a0d4-4d8a-ad65-805a6d14168d
 ## How to Run
 1. Clone the repository.
 2. Run `npm install`.
